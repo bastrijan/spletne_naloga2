@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Draw and Guess</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <!-- https://www.freeiconspng.com/img/653 -->
+    <link rel="icon" href="/static/gfx/gmd.png">
+    <link rel="stylesheet"  href="/static/css/login.css">
+    <link rel="stylesheet"  href="/static/css/chat.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <h1 id="title">Draw and Guess game</h1>
+    <img  class='gif' src="/static/gfx/confettiTransparent.gif"> </img>
+    <div class="all_elems">
+        <div class="main">
+            <button type="submit" id="play_another" class="btn btn-primary btn-block btn-start-Another">play another game</button>
+
+                <div class="word" id="wordID"></div>
+                <div class="info" id="infoID"><div class="start-btn"> <button  id="start-game-btn" class="btn btn-primary btn-block">Start the game</button></div></div>
+                <div class="drawing">
+                    <canvas class="canvas" id="canvasDraw"></canvas>
+                    <canvas class="canvas" id="canvasView"></canvas>
+                </div>
+                <div class="utils">
+                    <div class="uc">
+                        <button id="undoID">Undo</button>
+                        <button id="clearID">Clear</button>
+                    </div>
+                    <div class="color">
+                        <input type="color" id="colorID">
+                    </div>
+                    <div class="size">
+                        <button id="smallID">Small</button>
+                        <button id="mediumID">Medium</button>
+                        <button id="largeID">Large</button>
+                    </div>
+                </div>
+                <div class="msg">
+                    <input id="msgID" type="text" maxlength="128" placeholder="What is your guess?">
+                </div>
+                <!--THIS WILL BE THE LOGIN, SIGNUP AREA -->
+              <!--  <div class="turns" id="turnsID">
+                    <input id="usernameID" type="text" maxlength="8" placeholder="Please chose a username!">
+                </div> -->
+                <div class="turns"  id="turnsID">
+                  <div class="login-section" id="login-sec">
+                <%- include ('login/loginForm.html') %>
+                <%- include ('login/registerForm.html') %>
+                </div>
+            </div>
+
+        </div>
+
+        NOVI CHAT:
+        <div class="chat-section">
+          <section id="chat">
+          <header class="chat_title section_title icon">Chat</header>
+          <div class="clear_chat icon" title="clear chat history"></div>
+          <article class="chat_content_wrap cf">
+            <div class="chat_content_inner">
+
+            
+            <!-- .chat_content_inner -->
+            </div>
+          </article>
+
+          <!-- custom scroll bar -->
+           <div class="scroller-container">
+                    <div class="scrollbar"></div>
+                </div>
+
+          <footer class="chat_input cf">
+            <input type="text" class="message_input" id="message_input" placeholder="enter text message" />
+            <input type="button" class="chat_btn" id="message_button" value="send" title="enter message">
+            <i class="show_online icon" title="view online people"></i>
+          </footer>
+        </section>
+
+        <section id="online">
+          <header class="online_title section_title icon">online users</header>
+          <section class="online_list">
+
+          </section>
+        </section>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="playerStatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="playerStatModalBody">
+      <!--data about the player -->
+      <div class="container">
+      <div class="col-md-12" id="header">
+        <span>
+        </span>
+      <div class="player-card">
+        <img class="card-img-top" src="./static/img/user.png" alt="Card image cap">
+        <div class="card-block">
+          <h2 class="card-title" id="firstname" id="lastname"></h2>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" id="gamesPlayed">Games played:</li>
+          <li class="list-group-item" id="gamesGuessed">Games guessed:</li>
+          <li class="list-group-item" id="generalScore">Genral score:</li>
+          </ul>
+        <p class="card-text" id="comments"></p>
+        <div class="card-block">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/game.js"></script>
+</body>
+
+</html>
